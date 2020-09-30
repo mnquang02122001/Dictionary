@@ -38,11 +38,14 @@ public class DictionaryManagement {
     public static void dictionaryAdd(String path) throws IOException {
         System.out.print("Type word_target: ");
         String word_target = sc.nextLine();
+        if(Dictionary.dic.containsKey(word_target)){
+            System.out.println(word_target + " was existed");
+            return;
+        }
         System.out.print("Type word_explain: ");
         String word_explain = sc.nextLine();
         word_explain = "<html>" + word_explain + "</html>";
         Dictionary.dic.put(word_target, word_explain);
-        dictionaryExportToFile(path);
     }
     public static void dictionaryDelete(String path) throws IOException {
         System.out.print("Delete word_target: ");
@@ -53,7 +56,6 @@ public class DictionaryManagement {
         else{
             System.out.println("Cant find");
         }
-        dictionaryExportToFile(path);
     }
     public static void dictionaryModify(String path) throws IOException {
         System.out.print("Modify word_target: ");
@@ -67,7 +69,6 @@ public class DictionaryManagement {
             }
         }
         System.out.println("Cant find");
-        dictionaryExportToFile(path);
     }
     public static void dictionaryExportToFile(String path) throws IOException {
         FileWriter fw = new FileWriter(path);
