@@ -1,20 +1,22 @@
 import java.io.*;
-import java.util.Arrays;
 import java.util.Scanner;
 
 public class DictionaryManagement {
+    public static final String path = "E:\\My documents\\JavaProject\\src\\E_V.html";
     private static final Scanner sc = new Scanner(System.in);
-    public static void insertFromCommandline(){
+
+    public static void insertFromCommandline() {
         System.out.print("Input number of words: ");
         int n = sc.nextInt();
         sc.nextLine();
         System.out.println("Insert words: ");
-        for(int i = 0; i < n; i++){
+        for (int i = 0; i < n; i++) {
             Dictionary.dic.put(sc.nextLine(), sc.nextLine());
         }
         sc.close();
     }
-    public static void insertFromFile(String path) throws IOException {
+
+    public static void insertFromFile() throws IOException {
         FileReader fis = new FileReader(path);
         BufferedReader br = new BufferedReader(fis);
         String line;
@@ -27,18 +29,19 @@ public class DictionaryManagement {
         fis.close();
         br.close();
     }
-    public static void dictionaryLookup(String word_target){
-        if(Dictionary.dic.containsKey(word_target)) {
+
+    public static void dictionaryLookup(String word_target) {
+        if (Dictionary.dic.containsKey(word_target)) {
             System.out.println("The meaning of " + word_target + " is: " + Dictionary.dic.get(word_target));
-        }
-        else{
+        } else {
             System.out.println("Cant find");
         }
     }
-    public static void dictionaryAdd(String path) throws IOException {
+
+    public static void dictionaryAdd() throws IOException {
         System.out.print("Type word_target: ");
         String word_target = sc.nextLine();
-        if(Dictionary.dic.containsKey(word_target)){
+        if (Dictionary.dic.containsKey(word_target)) {
             System.out.println(word_target + " was existed");
             return;
         }
@@ -47,17 +50,18 @@ public class DictionaryManagement {
         word_explain = "<html>" + word_explain + "</html>";
         Dictionary.dic.put(word_target, word_explain);
     }
-    public static void dictionaryDelete(String path) throws IOException {
+
+    public static void dictionaryDelete() throws IOException {
         System.out.print("Delete word_target: ");
         String word_target = sc.nextLine();
-        if(Dictionary.dic.containsKey(word_target)){
+        if (Dictionary.dic.containsKey(word_target)) {
             Dictionary.dic.remove(word_target);
-        }
-        else{
+        } else {
             System.out.println("Cant find");
         }
     }
-    public static void dictionaryModify(String path) throws IOException {
+
+    public static void dictionaryModify() throws IOException {
         System.out.print("Modify word_target: ");
         String word_target = sc.nextLine();
         System.out.print("With word_explain: ");
@@ -70,11 +74,12 @@ public class DictionaryManagement {
         }
         System.out.println("Cant find");
     }
-    public static void dictionaryExportToFile(String path) throws IOException {
+
+    public static void dictionaryExportToFile() throws IOException {
         FileWriter fw = new FileWriter(path);
         BufferedWriter bw = new BufferedWriter(fw);
         int i = 0;
-        for(String word_target: Dictionary.dic.keySet()){
+        for (String word_target : Dictionary.dic.keySet()) {
             String res = word_target + Dictionary.dic.get(word_target) + "\n";
             bw.write(res);
         }
