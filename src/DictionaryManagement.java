@@ -38,7 +38,7 @@ public class DictionaryManagement {
         }
     }
 
-    public static void dictionaryAdd() throws IOException {
+    public static void dictionaryAdd() {
         System.out.print("Type word_target: ");
         String word_target = sc.nextLine();
         if (Dictionary.dic.containsKey(word_target)) {
@@ -51,7 +51,7 @@ public class DictionaryManagement {
         Dictionary.dic.put(word_target, word_explain);
     }
 
-    public static void dictionaryDelete() throws IOException {
+    public static void dictionaryDelete() {
         System.out.print("Delete word_target: ");
         String word_target = sc.nextLine();
         if (Dictionary.dic.containsKey(word_target)) {
@@ -61,7 +61,7 @@ public class DictionaryManagement {
         }
     }
 
-    public static void dictionaryModify() throws IOException {
+    public static void dictionaryModify() {
         System.out.print("Modify word_target: ");
         String word_target = sc.nextLine();
         System.out.print("With word_explain: ");

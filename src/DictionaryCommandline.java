@@ -3,7 +3,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class DictionaryCommandline {
-    public static List<String> searcherResult = new ArrayList<>();
 
     public static void showAllWorlds() {
         System.out.println("No\t|English\t\t\t|Vietnamese");
@@ -25,18 +24,16 @@ public class DictionaryCommandline {
         DictionaryManagement.dictionaryLookup(word_target);
     }
 
-    public static void dictionarySearcher(String word) {
-        String res = "";
+    public static List<String> dictionarySearcher(String word) {
+        List<String> searcherResult = new ArrayList<>();
+        if (word.equals("")) {
+            return null;
+        }
         for (String word_target : Dictionary.dic.keySet()) {
             if (word_target.length() >= word.length() && word_target.substring(0, word.length()).compareTo(word) == 0) {
-                res += word_target + ",";
                 searcherResult.add(word_target);
             }
         }
-        if (res.equals("")) {
-            System.out.println("Cant find");
-        } else {
-            System.out.println(res);
-        }
+        return searcherResult;
     }
 }
