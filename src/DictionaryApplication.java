@@ -49,6 +49,7 @@ public class DictionaryApplication extends Application {
     }
 
     public void display(Scene scene) {
+        scene.getStylesheets().add("myStyle.css");
         init(scene);
         textFieldAction();
         listViewAction();

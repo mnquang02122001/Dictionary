@@ -78,7 +78,6 @@ public class DictionaryManagement {
     public static void dictionaryExportToFile() throws IOException {
         FileWriter fw = new FileWriter(path);
         BufferedWriter bw = new BufferedWriter(fw);
-        int i = 0;
         for (String word_target : Dictionary.dic.keySet()) {
             String res = word_target + Dictionary.dic.get(word_target) + "\n";
             bw.write(res);
