@@ -16,10 +16,12 @@ import javafx.stage.Stage;
 
 import java.io.FileInputStream;
 import java.io.IOException;
+import java.util.Objects;
 
 
 public class DictionaryApplication extends Application {
-    private static final String FXML_PATH = "E:\\My documents\\JavaProject\\src\\Dictionary_FX.fxml";
+    private static final String FXML_PATH = "src/Dictionary_FX.fxml";
+    private static final String CSS_PATH = "myStyle.css";
     @FXML
     private TextField textField;
     @FXML
@@ -49,7 +51,7 @@ public class DictionaryApplication extends Application {
     }
 
     public void display(Scene scene) {
-        scene.getStylesheets().add("myStyle.css");
+        scene.getStylesheets().add(CSS_PATH);
         init(scene);
         textFieldAction();
         listViewAction();
@@ -60,7 +62,7 @@ public class DictionaryApplication extends Application {
     public void textFieldAction() {
         textField.textProperty().addListener((observable, oldValue, newValue) -> {
             this.listView.getItems().clear();
-            this.listView.getItems().addAll(DictionaryCommandline.dictionarySearcher(textField.getText()));
+            this.listView.getItems().addAll(Objects.requireNonNull(DictionaryCommandline.dictionarySearcher(textField.getText())));
         });
     }
 

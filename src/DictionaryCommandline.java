@@ -27,7 +27,7 @@ public class DictionaryCommandline {
     public static List<String> dictionarySearcher(String word) {
         List<String> searcherResult = new ArrayList<>();
         if (word.equals("")) {
-            return null;
+            return searcherResult;
         }
         for (String word_target : Dictionary.dic.keySet()) {
             if (word_target.length() >= word.length() && word_target.substring(0, word.length()).compareTo(word) == 0) {

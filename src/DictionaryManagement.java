@@ -2,7 +2,7 @@ import java.io.*;
 import java.util.Scanner;
 
 public class DictionaryManagement {
-    public static final String path = "E:\\My documents\\JavaProject\\src\\E_V.html";
+    public static final String path = "src/E_V.html";
     private static final Scanner sc = new Scanner(System.in);
 
     public static void insertFromCommandline() {
