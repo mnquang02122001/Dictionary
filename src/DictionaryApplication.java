@@ -1,4 +1,3 @@
-import com.sun.speech.freetts.VoiceManager;
 import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
@@ -22,6 +21,7 @@ import java.util.Objects;
 public class DictionaryApplication extends Application {
     private static final String FXML_PATH = "src/Dictionary_FX.fxml";
     private static final String CSS_PATH = "myStyle.css";
+    private static final String VOICE_TYPE = "kevin16";
     @FXML
     private TextField textField;
     @FXML
@@ -50,7 +50,7 @@ public class DictionaryApplication extends Application {
         this.webView = (WebView) scene.lookup("#webView");
     }
 
-    public void display(Scene scene) {
+    public void display(Scene scene) throws IOException {
         scene.getStylesheets().add(CSS_PATH);
         init(scene);
         textFieldAction();
@@ -72,14 +72,18 @@ public class DictionaryApplication extends Application {
     }
 
     @FXML
-    public void searchAction() {
+    public void searchAction() throws IOException {
         DictionaryApplication context = this;
-        context.webView.getEngine().loadContent(Dictionary.dic.get(textField.getText()), "text/html");
+        if (Dictionary.dic.containsKey(textField.getText())) {
+            context.webView.getEngine().loadContent(Dictionary.dic.get(textField.getText()), "text/html");
+        } else {
+            context.webView.getEngine().loadContent(Translator.translate("en", "vi", textField.getText()));
+        }
     }
 
     @FXML
     public void speakAction() {
-        Voice voice = new Voice("kevin16");
+        Voice voice = new Voice(VOICE_TYPE);
         voice.say(textField.getText());
     }
 
@@ -101,22 +105,6 @@ public class DictionaryApplication extends Application {
     @FXML
     public void exitAction() {
         Platform.exit();
-    }
-}
-
-class Voice {
-    private final String name;
-    private final com.sun.speech.freetts.Voice voice;
-
-    public Voice(String name) {
-        this.name = name;
-        this.voice = VoiceManager.getInstance().getVoice(this.name);
-        this.voice.allocate();
-    }
-
-    public void say(String st) {
-        this.voice.speak(st);
-        this.voice.deallocate();
     }
 }
 
