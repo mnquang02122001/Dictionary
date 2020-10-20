@@ -62,7 +62,7 @@ public class DictionaryApplication extends Application {
     public void textFieldAction() {
         textField.textProperty().addListener((observable, oldValue, newValue) -> {
             this.listView.getItems().clear();
-            this.listView.getItems().addAll(Objects.requireNonNull(DictionaryCommandline.dictionarySearcher(textField.getText())));
+            this.listView.getItems().addAll(Objects.requireNonNull(DictionaryCommandline.dictionarySearcher(textField.getText().toLowerCase())));
         });
     }
 
@@ -76,7 +76,7 @@ public class DictionaryApplication extends Application {
         DictionaryApplication context = this;
         if (Dictionary.dic.containsKey(textField.getText())) {
             context.webView.getEngine().loadContent(Dictionary.dic.get(textField.getText()), "text/html");
-        } else {
+        }else {
             context.webView.getEngine().loadContent(Translator.translate("en", "vi", textField.getText()));
         }
     }
