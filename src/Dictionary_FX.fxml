@@ -1,16 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import javafx.geometry.*?>
-<?import javafx.scene.text.*?>
-<?import javafx.scene.web.*?>
+<?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView?>
+<?import de.jensd.fx.glyphs.octicons.OctIconView?>
 <?import javafx.geometry.Insets?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.Menu?>
+<?import javafx.scene.control.MenuBar?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.web.WebView?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="402.0" prefWidth="1230.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="DictionaryApplication">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="402.0" prefWidth="1230.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="DictionaryApplication">
     <children>
         <HBox prefHeight="400.0" prefWidth="1230.0">
             <opaqueInsets>
@@ -41,11 +47,14 @@
                         </Label>
                         <HBox prefHeight="40.0" prefWidth="257.0">
                             <children>
-                                <TextField fx:id="textField" prefHeight="16.0" prefWidth="187.0" style="-fx-background-color: #FFFAF0;" />
-                                <Button mnemonicParsing="false" onAction="#searchAction" prefHeight="31.0" prefWidth="73.0" text="Search" />
+                                <TextField fx:id="textField" prefHeight="42.0" prefWidth="187.0" style="-fx-background-color: #FFFAF0;" />
+                                <Button mnemonicParsing="false" onAction="#searchAction" prefHeight="44.0" prefWidth="73.0">
+                           <graphic>
+                              <OctIconView fill="#0707dd" glyphName="SEARCH" size="25" />
+                           </graphic></Button>
                             </children>
                         </HBox>
-                        <ListView fx:id="listView" prefHeight="346.0" prefWidth="260.0" />
+                        <ListView fx:id="listView" prefHeight="288.0" prefWidth="260.0" />
                     </children>
                     <HBox.margin>
                         <Insets />
@@ -63,7 +72,10 @@
                 <HBox prefHeight="351.0" prefWidth="957.0">
                     <children>
                         <WebView fx:id="webView" prefHeight="306.0" prefWidth="950.0" />
-                        <Button mnemonicParsing="false" onAction="#speakAction" prefHeight="40.0" prefWidth="118.0" text="Speak" />
+                        <Button lineSpacing="10.0" mnemonicParsing="false" onAction="#speakAction" prefHeight="40.0" prefWidth="118.0">
+                     <graphic>
+                        <FontAwesomeIconView fill="#0707dd" glyphName="VOLUME_UP" size="30" />
+                     </graphic></Button>
                     </children>
                 </HBox>
             </children>
