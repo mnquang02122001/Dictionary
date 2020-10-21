@@ -39,7 +39,7 @@ public class DictionaryApplication extends Application {
         primaryStage.setScene(scene);
         primaryStage.setTitle("English - Vietnamese Dictionary");
         primaryStage.show();
-        DictionaryManagement.insertFromFile();
+        DBConnection.readAllData();
         display(scene);
 
     }
@@ -76,7 +76,7 @@ public class DictionaryApplication extends Application {
         DictionaryApplication context = this;
         if (Dictionary.dic.containsKey(textField.getText())) {
             context.webView.getEngine().loadContent(Dictionary.dic.get(textField.getText()), "text/html");
-        }else {
+        } else {
             context.webView.getEngine().loadContent(Translator.translate("en", "vi", textField.getText()));
         }
     }
