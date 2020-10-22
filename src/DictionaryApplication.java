@@ -15,6 +15,7 @@ import javafx.stage.Stage;
 
 import java.io.FileInputStream;
 import java.io.IOException;
+import java.sql.SQLException;
 import java.util.Objects;
 
 
@@ -122,8 +123,8 @@ class AlertBox {
             if (Dictionary.dic.containsKey(textField.getText())) {
                 Dictionary.dic.remove(textField.getText());
                 try {
-                    DictionaryManagement.dictionaryExportToFile();
-                } catch (IOException e) {
+                    DBConnection.deleteData(textField.getText());
+                } catch (SQLException | ClassNotFoundException e) {
                     e.printStackTrace();
                 }
                 display3("Successful");
@@ -159,13 +160,13 @@ class AlertBox {
             if (title.equals("Modify tool")) {
                 try {
                     modifyWord(textField1.getText(), textField2.getText());
-                } catch (IOException e) {
+                } catch (ClassNotFoundException | SQLException e) {
                     e.printStackTrace();
                 }
             } else if (title.equals("Add tool")) {
                 try {
                     addWord(textField1.getText(), textField2.getText());
-                } catch (IOException e) {
+                } catch (SQLException | ClassNotFoundException e) {
                     e.printStackTrace();
                 }
             }
@@ -179,24 +180,24 @@ class AlertBox {
         window.showAndWait();
     }
 
-    public static void addWord(String word_target, String word_explain) throws IOException {
+    public static void addWord(String word_target, String word_explain) throws SQLException, ClassNotFoundException {
         if (Dictionary.dic.containsKey(word_target)) {
             display3(word_target + " was existed");
         } else {
             word_explain = "<html>" + word_explain + "</html>";
             Dictionary.dic.put(word_target, word_explain);
-            DictionaryManagement.dictionaryExportToFile();
+            DBConnection.insertData(word_target, word_explain);
             display3("Successful");
         }
     }
 
-    public static void modifyWord(String word_target, String word_explain) throws IOException {
+    public static void modifyWord(String word_target, String word_explain) throws SQLException, ClassNotFoundException {
         boolean check = false;
         for (String word : Dictionary.dic.keySet()) {
             if (word.equals(word_target)) {
                 Dictionary.dic.put(word_target, "<html>" + word_explain + "</html>");
                 check = true;
-                DictionaryManagement.dictionaryExportToFile();
+                DBConnection.updateData(word_target, "<html>" + word_explain + "</html>");
                 display3("Successful");
             }
         }

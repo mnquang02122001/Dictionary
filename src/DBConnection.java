@@ -23,4 +23,36 @@ public class DBConnection {
         ps.close();
         con.close();
     }
+
+    public static void insertData(String word_target, String word_explain) throws SQLException, ClassNotFoundException {
+        Connection con = connect();
+        String sql = "INSERT INTO av VALUES(?,?)";
+        PreparedStatement ps = con.prepareStatement(sql);
+        ps.setString(1, word_target);
+        ps.setString(2, word_explain);
+        ps.execute();
+        ps.close();
+        con.close();
+    }
+
+    public static void deleteData(String word_target) throws SQLException, ClassNotFoundException {
+        Connection con = connect();
+        String sql = "DELETE FROM av WHERE word == ?";
+        PreparedStatement ps = con.prepareStatement(sql);
+        ps.setString(1, word_target);
+        ps.execute();
+        ps.close();
+        con.close();
+    }
+
+    public static void updateData(String word_target, String word_explain) throws SQLException, ClassNotFoundException {
+        Connection con = connect();
+        String sql = "UPDATE av SET html = ? WHERE word == ?";
+        PreparedStatement ps = con.prepareStatement(sql);
+        ps.setString(1, word_explain);
+        ps.setString(2, word_target);
+        ps.execute();
+        ps.close();
+        con.close();
+    }
 }
