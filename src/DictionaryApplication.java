@@ -64,6 +64,7 @@ public class DictionaryApplication extends Application {
         textField.textProperty().addListener((observable, oldValue, newValue) -> {
             this.listView.getItems().clear();
             this.listView.getItems().addAll(Objects.requireNonNull(DictionaryCommandline.dictionarySearcher(textField.getText().toLowerCase())));
+            this.webView.getEngine().loadContent("");
         });
     }
 
@@ -74,11 +75,10 @@ public class DictionaryApplication extends Application {
 
     @FXML
     public void searchAction() throws IOException {
-        DictionaryApplication context = this;
         if (Dictionary.dic.containsKey(textField.getText())) {
-            context.webView.getEngine().loadContent(Dictionary.dic.get(textField.getText()), "text/html");
+            this.webView.getEngine().loadContent(Dictionary.dic.get(textField.getText()), "text/html");
         } else {
-            context.webView.getEngine().loadContent(Translator.translate("en", "vi", textField.getText()));
+            this.webView.getEngine().loadContent(Translator.translate("en", "vi", textField.getText()));
         }
     }
 
